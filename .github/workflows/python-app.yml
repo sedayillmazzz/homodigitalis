@@ -20,4 +20,4 @@ jobs:
     uses: dawidd6/action-ansible-playbook@v2
     with:
      playbook: deploy.yml
-     directory: ../../
+     directory: ./
