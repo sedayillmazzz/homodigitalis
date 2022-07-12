@@ -1,0 +1,26 @@
+---
+- hosts: all
+  user: root
+  tasks:
+    - name: install requirements
+      yum: name=$item state=installed
+      with_items: 
+        - gcc
+        - python-devel
+        - python-setuptools
+
+    - name: install pip
+      easy_install: name=pip
+
+    - name: install venv
+      pip: name=venv
+     
+    - name: create venv
+      shell: python3 -m venv /opt/python_venvs/testvenv1
+
+    - name: venv activate
+      shell: source /opt/python_venvs/testvenv1/bin/activate
+      
+    - name: requirement
+      shell: source pip install -r requirements.txt
+    
