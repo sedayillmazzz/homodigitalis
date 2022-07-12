@@ -7,6 +7,8 @@
 
     - name: venv activate
       shell: source /opt/python_venvs/testvenv1/bin/activate
+      args:
+       executable: /bin/bash
       
     - name: requirement
       shell: source pip install -r requirements.txt
