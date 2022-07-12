@@ -2,13 +2,6 @@
 - hosts: localhost
   user: root
   tasks:
-    - name: install requirements
-      yum: name=$item state=installed
-      with_items: 
-        - gcc
-        - python-devel
-        - python-setuptools
-
     - name: install pip
       easy_install: name=pip
 
