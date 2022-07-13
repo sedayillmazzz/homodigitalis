@@ -4,12 +4,18 @@
   tasks:     
     - name: create venv
       shell: python3 -m venv /opt/python_venvs/testvenv1
-
+      shell: ls
+      
     - name: venv activate
       shell: source /opt/python_venvs/testvenv1/bin/activate
       args:
        executable: /bin/bash
+      shell: python3 -V
       
     - name: requirement
       shell: pip install -r requirements.txt
+      
+    - name: ansible version
+      shell: which ansible
+      shell: python3 -m pip list
     
