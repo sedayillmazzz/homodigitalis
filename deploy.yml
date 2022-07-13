@@ -12,11 +12,26 @@
        executable: /bin/bash
       shell: python3 -V
       
-    - name: Check if output directory exists
+    - name: Create directory
       file:
        path: /opt/python_venvs/test2
        state: directory
        
+    - name: Check if a file exists
+      stat:
+       path: /opt/python_venvs/testvenv1
+      register: file_data
+      
+    - name: report if a file exists
+      debug:
+       msg: "the file is exist"
+      when: file_data.stat.exist
+      
+    - name: report missing file
+      debug:
+       msg: "the file is not exist"
+      when: not file_data.stat.exist
+          
       
     - name: requirement
       shell: pip install -r requirements.txt
