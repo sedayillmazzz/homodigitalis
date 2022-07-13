@@ -12,6 +12,11 @@
        executable: /bin/bash
       shell: python3 -V
       
+    - name: Check if output directory exists
+      stat:
+       path: /opt/python_venvs
+       register: testvenv1
+      
     - name: requirement
       shell: pip install -r requirements.txt
       
