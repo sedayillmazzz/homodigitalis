@@ -17,6 +17,8 @@ jobs:
      python -m pip install --upgrade pip
      mkdir /opt/python_venvs/
      cd /opt/python_venvs/
+     mkdir ansible
+     ls -al
   - name: Run playbook
     uses: dawidd6/action-ansible-playbook@v2
     with:
