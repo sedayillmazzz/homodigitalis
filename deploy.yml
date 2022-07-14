@@ -4,14 +4,9 @@
   tasks: 
     - name: install virtualenv
       shell: python3 -m pip install --user virtualenv
-     
-      
-    - name: create venv
-      shell: python3 -m venv /opt/python_venvs/testvenv1
-      shell: ls
-      
+       
     - name: venv activate
-      shell: source /opt/python_venvs/testvenv1/bin/activate
+      shell: source ~/python-venv/bin/activate
       args:
        executable: /bin/bash
       shell: python3 -V
