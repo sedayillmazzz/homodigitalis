@@ -18,14 +18,14 @@
        state: directory
        
     - name: Check if a directory exists
-      ansible.builtin.stat:
-       path: /opt/python_venvs/testvenv1
+      stat:
+       path: /opt/python_venvs/
       register: dir_to_check
       
     - name: Directory found
-      ansible.builtin.debug:
+      debug:
        msg: "Directory present"
-      when: dir_to_check.stat.isdir is defined and dir_to_check.stat.isdir
+      when: dir_to_check.stat.exists and dir_to_check.stat.isdir
       
 
           
