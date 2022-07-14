@@ -3,7 +3,6 @@
   user: root
 
   tasks:
-
     # first ensure our target directory exists
     - name: Ensure target directory exists
       file:
@@ -18,18 +17,17 @@
       stat:
        path: /opt/python_venvs/
       register: dir_to_check
-      
+
     - name: Directory found
       debug:
        msg: "Directory present"
       when: dir_to_check.stat.exists and dir_to_check.stat.isdir
-      
-    # get each txt file 
+
+
+
+    # get each txt file
     - name: Get each txt file and create venvs
-      shell: python3 -m venv /opt/python_venvs/"{{ item | basename | splitext | first  }}"
-      shell: source /opt/python_venvs/"{{ item | basename | splitext | first  }}"/bin/activate
+      shell: python3 -m venv /opt/python_venvs/"{{ item | basename | splitext | first  }}" && cp ./venvs/"{{ item | basename }}" /opt/python_venvs/"{{ item | basename | splitext | first  }}"  && source /opt/python_venvs/"{{ item | basename | splitext | first  }}"/bin/activate && pip install -r /opt/python_venvs/"{{ item | basename | splitext | first  }}"/{{ item | basename}}
       args:
        executable: /bin/bash
       with_fileglob: "./venvs/*.txt"
-    - name: list venvs
-      shell: ls -al /opt/python_venvs/
