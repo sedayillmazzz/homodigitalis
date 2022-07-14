@@ -9,15 +9,6 @@
       file:
         dest: "./venvs"
         state: directory
-
-    # create venvs directory if it doesn't exist
-    - file:
-      path: /opt/python-venv/
-      state: directory
-      mode: 0755
-      owner: awx
-      group: awx
-
     # get each txt file 
     - name: Get each txt file and create venvs
       shell: python3 -m venv /opt/python-venv/"{{ item | basename | splitext | first  }}"
