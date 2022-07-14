@@ -19,6 +19,7 @@ jobs:
      cd /opt/python_venvs/
      mkdir ansible
      ls -al
+     pwd
   - name: Run playbook
     uses: dawidd6/action-ansible-playbook@v2
     with:
@@ -29,5 +30,6 @@ jobs:
      pwd
      ls -al /opt/python_venvs/
      python3 -V
+     ls -al
      which ansible
      python3 -m pip list
