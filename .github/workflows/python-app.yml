@@ -23,7 +23,7 @@ jobs:
   - name: ansible
     run: |
      pwd
-     ls -al
+     ls -al /opt/python_venvs/
      python3 -V
      which ansible
      python3 -m pip list
