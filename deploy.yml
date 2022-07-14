@@ -24,9 +24,6 @@
       shell: source /opt/python-venv/"{{ item | basename | splitext | first  }}"/bin/activate
       args:
        executable: /bin/bash
-
-      with_fileglob:
-        - "./venvs/*.txt"
-		
+      with_fileglob: "./venvs/*.txt"
     - name: list venvs
-	  shell: ls -al /opt/python-venv/
+      shell: ls -al /opt/python-venv/
