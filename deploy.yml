@@ -11,15 +11,25 @@
         state: directory
     - name: Create venv dir if it does not exist
       ansible.builtin.file:
-       path: /opt/python-venv
+       path: /opt/python_venvs/
        state: directory
        mode: '0755'
+    - name: Check if a directory exists
+      stat:
+       path: /opt/python_venvs/
+      register: dir_to_check
+      
+    - name: Directory found
+      debug:
+       msg: "Directory present"
+      when: dir_to_check.stat.exists and dir_to_check.stat.isdir
+      
     # get each txt file 
     - name: Get each txt file and create venvs
-      shell: python3 -m venv /opt/python-venv/"{{ item | basename | splitext | first  }}"
-      shell: source /opt/python-venv/"{{ item | basename | splitext | first  }}"/bin/activate
+      shell: python3 -m venv /opt/python_venvs/"{{ item | basename | splitext | first  }}"
+      shell: source /opt/python_venvs/"{{ item | basename | splitext | first  }}"/bin/activate
       args:
        executable: /bin/bash
       with_fileglob: "./venvs/*.txt"
     - name: list venvs
-      shell: ls -al /opt/python-venv/
+      shell: ls -al /opt/python_venvs/
