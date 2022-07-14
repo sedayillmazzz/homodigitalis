@@ -9,6 +9,11 @@
       file:
         dest: "./venvs"
         state: directory
+    - name: Create venv dir if it does not exist
+      ansible.builtin.file:
+       path: /opt/python-venv
+       state: directory
+       mode: '0755'
     # get each txt file 
     - name: Get each txt file and create venvs
       shell: python3 -m venv /opt/python-venv/"{{ item | basename | splitext | first  }}"
