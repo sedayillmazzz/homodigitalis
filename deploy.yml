@@ -5,6 +5,10 @@
     - name: install virtualenv
       shell: python3 -m pip install --user virtualenv
        
+    - name: create venv
+      shell: python3 -m venv testvenv1
+      shell: ls
+      
     - name: venv activate
       shell: source ~/python-venv/bin/activate
       args:
