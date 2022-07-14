@@ -17,20 +17,17 @@
        path: /opt/python_venvs/test2
        state: directory
        
-    - name: Check if a file exists
-      stat:
+    - name: Check if a directory exists
+      ansible.builtin.stat:
        path: /opt/python_venvs/testvenv1
-      register: file_data
+      register: dir_to_check
       
-    - name: report if a file exists
-      debug:
-       msg: "the file is exist"
-      when: file_data.stat.exist
+    - name: Directory found
+      ansible.builtin.debug:
+       msg: "Directory present"
+      when: dir_to_check.stat.isdir is defined and dir_to_check.stat.isdir
       
-    - name: report missing file
-      debug:
-       msg: "the file is not exist"
-      when: not file_data.stat.exist
+
           
       
     - name: requirement
