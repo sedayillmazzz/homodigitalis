@@ -20,6 +20,7 @@ jobs:
      mkdir ansible
      ls -al
      pwd
+     echo "${GITHUB_WORKSPACE}"
   - name: Run playbook
     uses: dawidd6/action-ansible-playbook@v2
     with:
@@ -33,3 +34,4 @@ jobs:
      ls -al
      which ansible
      python3 -m pip list
+     echo "${GITHUB_WORKSPACE}"
