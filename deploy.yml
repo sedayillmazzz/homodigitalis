@@ -1,56 +1,32 @@
 ---
 - hosts: localhost
   user: root
-  tasks: 
-    - name: install virtualenv
-      shell: python3 -m pip install --user virtualenv
-       
-    - name: create venv
-      shell: python3 -m venv testvenv1
-      shell: ls
-      
-    - name: venv activate
-      shell: source ~/python-venv/bin/activate
+
+  tasks:
+
+    # first ensure our target directory exists
+    - name: Ensure target directory exists
+      file:
+        dest: "./venvs"
+        state: directory
+
+    # create venvs directory if it doesn't exist
+    - file:
+      path: /opt/python-venv/
+      state: directory
+      mode: 0755
+      owner: awx
+      group: awx
+
+    # get each txt file 
+    - name: Get each txt file and create venvs
+      shell: python3 -m venv /opt/python-venv/"{{ item | basename | splitext | first  }}"
+      shell: source /opt/python-venv/"{{ item | basename | splitext | first  }}"/bin/activate
       args:
        executable: /bin/bash
-      shell: python3 -V
-      
-    - name: Create directory
-      file:
-       path: /opt/python_venvs/test2
-       state: directory
-       
-    - name: Check if a directory exists
-      stat:
-       path: /opt/python_venvs/test2
-      register: dir_to_check
-      
-    - name: Directory found
-      debug:
-       msg: "Directory present"
-      when: dir_to_check.stat.exists and dir_to_check.stat.isdir
-      
-    - name: Check if a file exists
-      stat:
-       path: /opt/python_venvs/testvenv1
-      register: file_data
-      
-    - name: file found
-      debug:
-       msg: "File present"
-      when: file_data.stat.exists
-      
-    - name: file not found
-      debug:
-       msg: "File not found"
-      when: not file_data.stat.exists
 
-          
-      
-    - name: requirement
-      shell: pip install -r requirements.txt
-      
-    - name: ansible version
-      shell: which ansible
-      shell: python3 -m pip list
-    
+      with_fileglob:
+        - "./venvs/*.txt"
+		
+    - name: list venvs
+	  shell: ls -al /opt/python-venv/
