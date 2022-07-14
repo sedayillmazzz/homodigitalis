@@ -35,3 +35,8 @@ jobs:
      which ansible
      python3 -m pip list
      echo "${GITHUB_WORKSPACE}"
+  - name: run test.sh
+    run: |
+     chmod +x "${GITHUB_WORKSPACE}/test.sh"
+     ${GITHUB_WORKSPACE}/test.sh
+   
