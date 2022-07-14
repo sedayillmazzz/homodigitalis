@@ -27,6 +27,20 @@
        msg: "Directory present"
       when: dir_to_check.stat.exists and dir_to_check.stat.isdir
       
+    - name: Check if a file exists
+      stat:
+       path: /opt/python_venvs/testvenv1
+      register: file_data
+      
+    - name: file found
+      debug:
+       msg: "File present"
+      when: file_data.stat.exists
+      
+    - name: file not found
+      debug:
+       msg: "File not found"
+      when: not file_data.stat.exists
 
           
       
