@@ -2,11 +2,9 @@
 - hosts: localhost
   user: root
   tasks: 
-    - name: install pip
-      easy_install: name=pip
-
     - name: install virtualenv
-      pip: name=virtualenv
+      shell: python3 -m pip install --user virtualenv
+     
       
     - name: create venv
       shell: python3 -m venv /opt/python_venvs/testvenv1
