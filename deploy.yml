@@ -19,7 +19,7 @@
        
     - name: Check if a directory exists
       stat:
-       path: /opt/python_venvs/
+       path: /opt/python_venvs/testvenv1
       register: dir_to_check
       
     - name: Directory found
