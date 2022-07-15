@@ -26,7 +26,7 @@
     # get each txt file
     - name: Get each txt file and create venvs
       shell: |
-       if [[ "$(git status --porcelain | grep venvs/{{ item | basename}})" == *"venvs/{{ item | basename}}" ]]; then
+       if [[ "$(git diff @^ | grep venvs/{{ item | basename}})" == *"venvs/{{ item | basename}}" ]]; then
          python3 -m venv /opt/python_venvs/"{{ item | basename | splitext | first  }}" && cp ./venvs/"{{ item | basename }}" /opt/python_venvs/"{{ item | basename | splitext | first  }}"  && source /opt/python_venvs/"{{ item | basename | splitext | first  }}"/bin/activate && pip install -r /opt/python_venvs/"{{ item | basename | splitext | first  }}"/{{ item | basename}}
        fi
       args:
